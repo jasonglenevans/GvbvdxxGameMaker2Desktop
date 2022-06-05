@@ -1,0 +1,18 @@
+module.exports = {
+	debugWindow: null,
+	open:() => {
+		var debugConsole = window.open("about:blank",20,20);
+		debugConsole.document.body.style.background = "black";
+		this.debugWindow = debugConsole;
+		return debugConsole; //if they want the window.
+	},
+	log:(text) => {
+		if (debugWindow) {
+			var p = document.createElement("p");
+			p.style.color = "white";
+			p.innerHTML = text;
+			var debugConsole = this.debugWindow;
+			debugConsole.document.body.appendChild(p);
+		}
+	}
+};
