@@ -9,4 +9,4 @@ function loadDefaultGame() {
 	Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(sampleCode),workspace);
 	},70);
 }
-loadDefaultGame();
+loadDefaultGame(); //load function, for modders out there, call this when making a new game.

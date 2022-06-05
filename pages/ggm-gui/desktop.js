@@ -18,12 +18,11 @@ if (devTools) {
 setInterval(() => {
 	window.onerror = function (a) {
 		if (!(devTools)) {
-			electronWindow.hide();
-			dialog.showErrorBox("Unexpected Error!",`Gvbvdxx Game Maker 2 Desktop Has Crashed,
+/* 			dialog.showErrorBox("Unexpected Error!",`Gvbvdxx Game Maker 2 Desktop Has Crashed,
 We Are Sorry But We Need To Quit,
 The Error Was Logged With:
 ${e}`);
-			electronWindow.close();
+			electronWindow.close(); */
 		}
 	};
 },300);

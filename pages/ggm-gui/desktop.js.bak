@@ -144,17 +144,6 @@ try{
 	require("./ggm-gui/desktop_themes.js")
 }catch(e){console.error(e);}
 function closeThemes() {
- 	var message = dialog.showMessageBoxSync(electronWindow,{
-		title:"Restart App?",
-		message:`Do You Want To Restart The App, You Will Need To Do This To Update The Theme.`,
-		buttons:["yes","no"],
-		type:"question"
-	});
-	if (message == 0) {
-		window.onbeforeunload = (event) => {
-		};
-		window.location.reload();
-	}
 	try{
 		//TODO: update this script here if you updated the code for saving in the gui script.
 		fs.writeFileSync(window.saveFilePath,gui.editorToJsonText());

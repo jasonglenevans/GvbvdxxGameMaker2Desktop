@@ -2,6 +2,8 @@ rmdir "pages/.git" --ignore-fail-on-non-empty
 
 rmdir ".git" --ignore-fail-on-non-empty
 
+npm run build
+
 git init
 
 git add .
