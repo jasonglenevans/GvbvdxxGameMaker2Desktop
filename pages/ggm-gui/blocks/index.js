@@ -10,6 +10,7 @@ gui.loadScript("blocks/loging.js");
 gui.loadScript("blocks/other.js");
 gui.loadScript("blocks/variables.js"); //aka "display"
 gui.loadScript("defaultGame.js");
+loadDefaultGame(); //load function, for modders out there, call this when making a new game.
 function myUpdateFunction(event) {
   var code = Blockly.JavaScript.workspaceToCode(workspace);
   vm.code = code;

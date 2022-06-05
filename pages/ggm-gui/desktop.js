@@ -15,16 +15,21 @@ if (devTools) {
 	electronWindow.openDevTools();
 }
 //give it a second to do something.
-setInterval(() => {
-	window.onerror = function (a) {
+setTimeout(() => {
+	window.onerror = function (e) {
 		if (!(devTools)) {
-/* 			dialog.showErrorBox("Unexpected Error!",`Gvbvdxx Game Maker 2 Desktop Has Crashed,
+ 			dialog.showErrorBox("Unexpected Error!",`Gvbvdxx Game Maker 2 Desktop Has Crashed,
 We Are Sorry But We Need To Quit,
 The Error Was Logged With:
 ${e}`);
-			electronWindow.close(); */
+			window.onbeforeunload = (event) => {
+			};
+			electronWindow.close();
 		}
 	};
+/* 	setInterval(() => {
+		errors
+	}); */
 },300);
 electronConsole.log("loaded desktop scripts");
 window.desktopFullScreenFunction = function (value) {
