@@ -1,0 +1,36 @@
+{
+  "name": "gvbvdxx-game-maker-2",
+  "productName": "Gvbvdxx Game Maker 2 Desktop",
+  "version": "1.7.5",
+  "description": "A Game Maker For Freebies",
+  "main": "main.js",
+  "scripts": {
+    "test": "electron . ./test.ggm2g",
+    "build": "electron-builder"
+  },
+  "author": "gvbb\u001b[2vdxx aka Jason Glen Evans",
+  "license": "MIT",
+  "dependencies": {
+    "@electron/remote": "^2.0.8",
+    "http": "^0.0.1-security",
+    "ip": "^1.1.8"
+  },
+  "devDependencies": {
+    "electron": "^19.0.3",
+    "electron-builder": "^23.0.3"
+  },
+  "build": {
+    "appId": "gvbvdxx.game.maker.2.desktop.app",
+    "fileAssociations": [
+      {
+        "ext": "ggm2g",
+        "name": "Gvbvdxx Game Maker 2 Game",
+        "role": "Editor"
+      }
+    ],
+    "nsis": {
+      "perMachine": true,
+      "oneClick": false
+    }
+  }
+}

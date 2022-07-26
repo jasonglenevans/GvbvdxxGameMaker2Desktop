@@ -1,0 +1,6 @@
+<p>Gvbvdxx Game Maker 2 - Has Moved To The Pages Folder, You Will Get Redirected To It In A Second</p>
+<script>
+setTimeout(function () {
+	window.location = "./pages/";
+},1000)
+</script>

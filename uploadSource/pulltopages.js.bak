@@ -1,0 +1,79 @@
+var exec = require("node:child_process").exec;
+var fs = require("fs");
+var path = require("path");
+var files = [];
+var directories = [];
+try{
+	fs.mkdirSync("./pages")
+}catch(e){}
+function getFiles(dir,extraPath) {
+	fs.readdirSync(dir).forEach((f) => {
+		var real = path.join(dir,f);
+		var otherReal = extraPath;
+		if (fs.statSync(real).isDirectory()) {
+			//console.log(f+" is directory");
+			directories.push({real:real,dir:f,from:otherReal});
+			console.log(otherReal);
+			var addPath = "./";
+			if (otherReal) {
+				addPath = otherReal;
+			}
+			try{
+				if (!(f.toLocaleString() == ".git")) {
+					fs.mkdirSync(path.join("./pages",addPath,f))
+				}
+			}catch(e){}
+			getFiles(real,path.join(addPath,f));
+		} else {
+			//console.log(real);
+			files.push({real:real,dir:f,from:otherReal});
+			var addPath = "./";
+			if (otherReal) {
+				addPath = otherReal;
+			}
+			try{
+				fs.writeFileSync(path.join("./pages",addPath,f),fs.readFileSync(real));
+			}catch(e){}
+		}
+	})
+}
+function startCopy() {
+	getFiles("./GvbvdxxGameMaker2");
+}
+
+function updateVersion() {
+	console.log("updating json version...");
+	var packageJSON = JSON.parse(fs.readFileSync("./package.json",{encoding:"UTF-8"}));
+	var version = packageJSON.version;
+	var splitVersion = version.split(".");
+	splitVersion[2] = Number(splitVersion[2])+1;
+	if (Number(splitVersion[2]) == 10) {
+		splitVersion[2] = 0;
+		splitVersion[1] = Number(splitVersion[1])+1;
+		if (Number(splitVersion[1]) == 10) {
+			splitVersion[1] = 0;
+			splitVersion[0] = Number(splitVersion[0])+1;
+		}
+	}
+	packageJSON.version = splitVersion.join(".");
+	fs.writeFileSync("./package.json",JSON.stringify(packageJSON,null,"  "))
+}
+try{
+fs.rmSync("./GvbvdxxGameMaker2", { recursive: true, force: true });
+}catch(e){}
+try{
+fs.rmSync("./dist", { recursive: true, force: true });
+}catch(e){}
+console.log("pulling from https://github.com/jasonglenevans/GvbvdxxGameMaker2.git")
+exec("git clone https://github.com/jasonglenevans/GvbvdxxGameMaker2.git",function (a,b,c,d) {
+	console.log("pulled from https://github.com/jasonglenevans/GvbvdxxGameMaker2.git");
+	console.log("now copying files...");
+	startCopy();
+	fs.rmSync("./GvbvdxxGameMaker2", { recursive: true, force: true });
+	updateVersion()
+	console.log("building app...");
+	exec("electron-builder",function (a,b,c,d) {
+		console.log("built app!");
+		
+	})
+})
